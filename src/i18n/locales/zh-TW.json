@@ -33,7 +33,13 @@
       "error": "連線錯誤"
     },
     "selectEngine": "選擇引擎",
-    "comingSoon": "即將支援"
+    "comingSoon": "即將支援",
+    "theme": {
+      "light": "淺色",
+      "dark": "深色",
+      "system": "跟隨系統",
+      "toggle": "切換主題"
+    }
   },
   "settings": {
     "backToApp": "返回MossC",

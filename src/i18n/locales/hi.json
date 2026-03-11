@@ -33,7 +33,13 @@
       "error": "कनेक्शन त्रुटि"
     },
     "selectEngine": "इंजन चुनें",
-    "comingSoon": "जल्द आ रहा है"
+    "comingSoon": "जल्द आ रहा है",
+    "theme": {
+      "light": "लाइट",
+      "dark": "डार्क",
+      "system": "सिस्टम",
+      "toggle": "थीम बदलें"
+    }
   },
   "settings": {
     "backToApp": "MossC पर वापस जाएँ",

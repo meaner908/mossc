@@ -33,7 +33,13 @@
       "error": "Lỗi kết nối"
     },
     "selectEngine": "Chọn engine",
-    "comingSoon": "Sắp hỗ trợ"
+    "comingSoon": "Sắp hỗ trợ",
+    "theme": {
+      "light": "Sáng",
+      "dark": "Tối",
+      "system": "Hệ thống",
+      "toggle": "Chuyển giao diện"
+    }
   },
   "settings": {
     "backToApp": "Quay lại MossC",

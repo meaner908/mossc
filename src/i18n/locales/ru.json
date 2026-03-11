@@ -33,7 +33,13 @@
       "error": "Ошибка подключения"
     },
     "selectEngine": "Выбрать движок",
-    "comingSoon": "Скоро будет"
+    "comingSoon": "Скоро будет",
+    "theme": {
+      "light": "Светлая",
+      "dark": "Тёмная",
+      "system": "Системная",
+      "toggle": "Переключить тему"
+    }
   },
   "settings": {
     "backToApp": "Вернуться в MossC",

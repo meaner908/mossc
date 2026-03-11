@@ -33,7 +33,13 @@
       "error": "خطأ في الاتصال"
     },
     "selectEngine": "اختر المحرك",
-    "comingSoon": "قريبًا"
+    "comingSoon": "قريبًا",
+    "theme": {
+      "light": "فاتح",
+      "dark": "داكن",
+      "system": "تلقائي",
+      "toggle": "تبديل السمة"
+    }
   },
   "settings": {
     "backToApp": "العودة إلى MossC",

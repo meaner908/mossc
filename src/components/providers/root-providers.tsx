@@ -1,5 +1,6 @@
 "use client"
 
+import { ThemeProvider } from "next-themes"
 import { Toaster } from "@/components/ui/sonner"
 import { TooltipProvider } from "@/components/ui/tooltip"
 import { LanguageProvider } from "@/i18n"
@@ -15,14 +16,16 @@ export function RootProviders({
   initialPreference: LocalePreference
 }) {
   return (
-    <LanguageProvider
-      initialLocale={initialLocale}
-      initialPreference={initialPreference}
-    >
-      <TooltipProvider>
-        {children}
-        <Toaster />
-      </TooltipProvider>
-    </LanguageProvider>
+    <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
+      <LanguageProvider
+        initialLocale={initialLocale}
+        initialPreference={initialPreference}
+      >
+        <TooltipProvider>
+          {children}
+          <Toaster />
+        </TooltipProvider>
+      </LanguageProvider>
+    </ThemeProvider>
   )
 }

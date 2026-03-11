@@ -33,7 +33,13 @@
       "error": "Erreur de connexion"
     },
     "selectEngine": "Choisir le moteur",
-    "comingSoon": "Bientôt disponible"
+    "comingSoon": "Bientôt disponible",
+    "theme": {
+      "light": "Clair",
+      "dark": "Sombre",
+      "system": "Système",
+      "toggle": "Changer le thème"
+    }
   },
   "settings": {
     "backToApp": "Retour à MossC",

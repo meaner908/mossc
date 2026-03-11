@@ -49,7 +49,7 @@ export default async function RootLayout({
   const initialDirection = getLocaleDirection(initialLocale)
 
   return (
-    <html lang={initialLocale} dir={initialDirection}>
+    <html lang={initialLocale} dir={initialDirection} suppressHydrationWarning>
       <body
         className="antialiased"
       >

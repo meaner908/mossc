@@ -33,7 +33,13 @@
       "error": "연결 오류"
     },
     "selectEngine": "엔진 선택",
-    "comingSoon": "곧 지원"
+    "comingSoon": "곧 지원",
+    "theme": {
+      "light": "라이트",
+      "dark": "다크",
+      "system": "시스템",
+      "toggle": "테마 전환"
+    }
   },
   "settings": {
     "backToApp": "MossC로 돌아가기",

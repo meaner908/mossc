@@ -21,6 +21,7 @@ import {
 import { Badge } from "@/components/ui/badge"
 import { buttonVariants } from "@/components/ui/button"
 import { GatewayConfigDialog } from "./gateway-config-dialog"
+import { ThemeToggle } from "./theme-toggle"
 
 const connectionColors: Record<string, string> = {
   connected: "text-green-600",
@@ -138,6 +139,7 @@ export function TopNav({ onVersionClick }: TopNavProps) {
       <div className="flex-1" />
 
       <div className="flex items-center gap-1 shrink-0">
+        <ThemeToggle />
         <span
           role="button"
           tabIndex={0}

@@ -33,7 +33,13 @@
       "error": "接続エラー"
     },
     "selectEngine": "エンジンを選択",
-    "comingSoon": "近日対応"
+    "comingSoon": "近日対応",
+    "theme": {
+      "light": "ライト",
+      "dark": "ダーク",
+      "system": "システム",
+      "toggle": "テーマを切替"
+    }
   },
   "settings": {
     "backToApp": "MossC に戻る",
