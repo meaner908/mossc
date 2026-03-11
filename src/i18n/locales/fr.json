@@ -280,5 +280,17 @@
   },
   "changelog": {
     "title": "Journal des modifications"
+  },
+  "login": {
+    "title": "Se connecter à MossC",
+    "description": "Entrez votre mot de passe pour continuer",
+    "passwordLabel": "Mot de passe",
+    "passwordPlaceholder": "Entrez le mot de passe",
+    "submit": "Se connecter",
+    "submitting": "Connexion...",
+    "error": "Mot de passe incorrect. Veuillez réessayer.",
+    "networkError": "Erreur réseau. Vérifiez votre connexion et réessayez.",
+    "logout": "Se déconnecter",
+    "loggingOut": "Déconnexion..."
   }
 }

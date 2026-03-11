@@ -280,5 +280,17 @@
   },
   "changelog": {
     "title": "변경 이력"
+  },
+  "login": {
+    "title": "MossC에 로그인",
+    "description": "계속하려면 비밀번호를 입력하세요",
+    "passwordLabel": "비밀번호",
+    "passwordPlaceholder": "비밀번호 입력",
+    "submit": "로그인",
+    "submitting": "로그인 중...",
+    "error": "비밀번호가 올바르지 않습니다. 다시 시도해주세요.",
+    "networkError": "네트워크 오류입니다. 연결을 확인하고 다시 시도해주세요.",
+    "logout": "로그아웃",
+    "loggingOut": "로그아웃 중..."
   }
 }

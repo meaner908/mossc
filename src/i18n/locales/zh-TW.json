@@ -280,5 +280,17 @@
   },
   "changelog": {
     "title": "更新日誌"
+  },
+  "login": {
+    "title": "登入 MossC",
+    "description": "請輸入密碼以繼續",
+    "passwordLabel": "密碼",
+    "passwordPlaceholder": "請輸入密碼",
+    "submit": "登入",
+    "submitting": "登入中...",
+    "error": "密碼錯誤，請重試。",
+    "networkError": "網路錯誤，請檢查連線後重試。",
+    "logout": "登出",
+    "loggingOut": "登出中..."
   }
 }

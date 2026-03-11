@@ -280,5 +280,17 @@
   },
   "changelog": {
     "title": "Nhật ký thay đổi"
+  },
+  "login": {
+    "title": "Đăng nhập vào MossC",
+    "description": "Nhập mật khẩu để tiếp tục",
+    "passwordLabel": "Mật khẩu",
+    "passwordPlaceholder": "Nhập mật khẩu",
+    "submit": "Đăng nhập",
+    "submitting": "Đang đăng nhập...",
+    "error": "Mật khẩu không đúng. Vui lòng thử lại.",
+    "networkError": "Lỗi mạng. Vui lòng kiểm tra kết nối và thử lại.",
+    "logout": "Đăng xuất",
+    "loggingOut": "Đang đăng xuất..."
   }
 }

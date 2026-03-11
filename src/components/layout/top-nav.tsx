@@ -1,8 +1,9 @@
 "use client"
 
 import { useEffect, useState } from "react"
+import { useRouter } from "next/navigation"
 import Image from "next/image"
-import { Bug, Check, ChevronDown, Loader2, Wifi, WifiOff } from "lucide-react"
+import { Bug, Check, ChevronDown, Loader2, LogOut, Wifi, WifiOff } from "lucide-react"
 
 import { cn } from "@/lib/utils"
 import { useI18n } from "@/i18n"
@@ -36,8 +37,29 @@ interface TopNavProps {
 export function TopNav({ onVersionClick }: TopNavProps) {
   const { state } = useApp()
   const { t } = useI18n()
+  const router = useRouter()
   const { summary, loadSummary } = useConnectionSummary()
   const [gatewayDialogOpen, setGatewayDialogOpen] = useState(false)
+  const [authEnabled, setAuthEnabled] = useState(false)
+  const [loggingOut, setLoggingOut] = useState(false)
+
+  useEffect(() => {
+    fetch("/api/auth/status")
+      .then((res) => res.json() as Promise<{ authEnabled: boolean }>)
+      .then((data) => setAuthEnabled(data.authEnabled))
+      .catch(() => { /* ignore */ })
+  }, [])
+
+  const handleLogout = async () => {
+    setLoggingOut(true)
+    try {
+      await fetch("/api/auth/logout", { method: "POST" })
+      router.push("/login")
+      router.refresh()
+    } catch {
+      setLoggingOut(false)
+    }
+  }
 
   const engineOptions = [
     { id: "openclaw", name: "OpenClaw", active: true },
@@ -160,6 +182,23 @@ export function TopNav({ onVersionClick }: TopNavProps) {
             <span>{t("header.bugFeedback")}</span>
           </a>
         ) : null}
+        {authEnabled && (
+          <button
+            onClick={() => void handleLogout()}
+            disabled={loggingOut}
+            title={loggingOut ? t("login.loggingOut") : t("login.logout")}
+            className={cn(
+              buttonVariants({ variant: "ghost", size: "icon" }),
+              "h-8 w-8 text-muted-foreground disabled:opacity-50"
+            )}
+          >
+            {loggingOut ? (
+              <Loader2 className="h-4 w-4 animate-spin" />
+            ) : (
+              <LogOut className="h-4 w-4" />
+            )}
+          </button>
+        )}
       </div>
     </header>
   )

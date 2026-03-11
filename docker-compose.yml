@@ -11,6 +11,8 @@
     environment:
       NODE_ENV: production
       OPENCLAW_STATE_DIR: /data/openclaw
+      # Optional: set to protect the app with a password on public deployments.
+      MOSSC_PASSWORD: ${MOSSC_PASSWORD:-}
     volumes:
       # Persist OpenClaw/MossC state & settings.
       # Override with a host path like: OPENCLAW_STATE_DIR_HOST=D:/Users/you/.openclaw
@@ -19,7 +21,3 @@
 
 volumes:
   mossc-openclaw:
-
-
-
-

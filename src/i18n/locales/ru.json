@@ -280,5 +280,17 @@
   },
   "changelog": {
     "title": "История изменений"
+  },
+  "login": {
+    "title": "Войти в MossC",
+    "description": "Введите пароль для продолжения",
+    "passwordLabel": "Пароль",
+    "passwordPlaceholder": "Введите пароль",
+    "submit": "Войти",
+    "submitting": "Вход...",
+    "error": "Неверный пароль. Попробуйте снова.",
+    "networkError": "Ошибка сети. Проверьте подключение и повторите попытку.",
+    "logout": "Выйти",
+    "loggingOut": "Выход..."
   }
 }
