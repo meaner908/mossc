@@ -124,7 +124,11 @@
     "viewDetails": "Подробнее",
     "downloadReport": "Скачать отчёт",
     "download": "Скачать",
-    "preview": "Предпросмотр"
+    "preview": "Предпросмотр",
+    "copyMarkdown": "Скопировать Markdown",
+    "copied": "Скопировано!",
+    "rawMarkdown": "Показать исходный текст",
+    "renderedMarkdown": "Показать отрисовку"
   },
   "messageInput": {
     "placeholders": {

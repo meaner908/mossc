@@ -169,7 +169,11 @@
     "viewDetails": "View details",
     "downloadReport": "Download report",
     "download": "Download",
-    "preview": "Preview"
+    "preview": "Preview",
+    "copyMarkdown": "Copy markdown",
+    "copied": "Copied!",
+    "rawMarkdown": "View raw",
+    "renderedMarkdown": "View rendered"
   },
   "messageInput": {
     "placeholders": {

@@ -1,7 +1,7 @@
 "use client"
 
-import { Children, Fragment } from "react"
-import { Download, Eye, FileText } from "lucide-react"
+import { Children, Fragment, useEffect, useRef, useState } from "react"
+import { Check, Code2, Copy, Download, Eye, FileText } from "lucide-react"
 import { useTheme } from "next-themes"
 import Markdown from "react-markdown"
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter"
@@ -27,6 +27,26 @@ interface MessageBubbleProps {
 export function MessageBubble({ message, showSenderInfo = false, onAgentAvatarClick }: MessageBubbleProps) {
   const { t } = useI18n()
   useAvatarVersion()
+  const [showRaw, setShowRaw] = useState(false)
+  const [copied, setCopied] = useState(false)
+  const copyTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null)
+
+  useEffect(() => {
+    return () => {
+      if (copyTimerRef.current !== null) clearTimeout(copyTimerRef.current)
+    }
+  }, [])
+
+  const handleCopy = async () => {
+    try {
+      await navigator.clipboard.writeText(message.content)
+      setCopied(true)
+      if (copyTimerRef.current !== null) clearTimeout(copyTimerRef.current)
+      copyTimerRef.current = setTimeout(() => setCopied(false), 2000)
+    } catch {
+      // clipboard access denied or unavailable — no-op
+    }
+  }
 
   if (message.type === "system") {
     return (
@@ -137,22 +157,52 @@ export function MessageBubble({ message, showSenderInfo = false, onAgentAvatarCl
           ) : message.type === "file" && message.fileAttachment ? (
             <FileAttachmentContent file={message.fileAttachment} text={message.content} />
           ) : (
-            <MessageContent content={message.content} mentions={message.mentions} />
+            <MessageContent content={message.content} mentions={message.mentions} showRaw={showRaw} />
           )}
         </div>
 
-        {/* Timestamp — hover only */}
-        <span className="text-[11px] text-muted-foreground/50 mt-0.5 opacity-0 group-hover:opacity-100 transition-opacity">
-          {message.timestamp}
-        </span>
+        {/* Timestamp + action buttons — hover only */}
+        <div className="flex items-center gap-1.5 mt-0.5 opacity-0 group-hover:opacity-100 transition-opacity">
+          <span className="text-[11px] text-muted-foreground/50">
+            {message.timestamp}
+          </span>
+          {message.content && message.type !== "task-card" && message.type !== "file" && (
+            <>
+              <button
+                className="h-5 w-5 flex items-center justify-center rounded text-muted-foreground/50 hover:text-muted-foreground hover:bg-muted transition-colors"
+                onClick={handleCopy}
+                title={copied ? t("messageBubble.copied") : t("messageBubble.copyMarkdown")}
+                aria-label={copied ? t("messageBubble.copied") : t("messageBubble.copyMarkdown")}
+              >
+                {copied ? <Check className="h-3 w-3" /> : <Copy className="h-3 w-3" />}
+              </button>
+              <button
+                className="h-5 w-5 flex items-center justify-center rounded text-muted-foreground/50 hover:text-muted-foreground hover:bg-muted transition-colors"
+                onClick={() => setShowRaw((v) => !v)}
+                title={showRaw ? t("messageBubble.renderedMarkdown") : t("messageBubble.rawMarkdown")}
+                aria-label={showRaw ? t("messageBubble.renderedMarkdown") : t("messageBubble.rawMarkdown")}
+              >
+                {showRaw ? <Eye className="h-3 w-3" /> : <Code2 className="h-3 w-3" />}
+              </button>
+            </>
+          )}
+        </div>
       </div>
     </div>
   )
 }
 
-function MessageContent({ content, mentions }: { content: string; mentions?: string[] }) {
+function MessageContent({ content, mentions, showRaw }: { content: string; mentions?: string[]; showRaw?: boolean }) {
   const { resolvedTheme } = useTheme()
   const isDark = resolvedTheme === "dark"
+
+  if (showRaw) {
+    return (
+      <pre className="whitespace-pre-wrap font-mono text-xs leading-relaxed break-words">
+        {content}
+      </pre>
+    )
+  }
 
   const processMentions = (text: string) => {
     if (!mentions?.length) return text

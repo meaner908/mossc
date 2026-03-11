@@ -124,7 +124,11 @@
     "viewDetails": "詳細を見る",
     "downloadReport": "レポートをダウンロード",
     "download": "ダウンロード",
-    "preview": "プレビュー"
+    "preview": "プレビュー",
+    "copyMarkdown": "Markdownをコピー",
+    "copied": "コピーしました！",
+    "rawMarkdown": "生テキストを表示",
+    "renderedMarkdown": "レンダリングを表示"
   },
   "messageInput": {
     "placeholders": {

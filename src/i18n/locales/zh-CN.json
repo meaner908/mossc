@@ -169,7 +169,11 @@
     "viewDetails": "查看详情",
     "downloadReport": "下载报告",
     "download": "下载",
-    "preview": "预览"
+    "preview": "预览",
+    "copyMarkdown": "复制 Markdown",
+    "copied": "已复制！",
+    "rawMarkdown": "查看原始内容",
+    "renderedMarkdown": "查看渲染效果"
   },
   "messageInput": {
     "placeholders": {

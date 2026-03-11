@@ -124,7 +124,11 @@
     "viewDetails": "विवरण देखें",
     "downloadReport": "रिपोर्ट डाउनलोड करें",
     "download": "डाउनलोड",
-    "preview": "पूर्वावलोकन"
+    "preview": "पूर्वावलोकन",
+    "copyMarkdown": "Markdown कॉपी करें",
+    "copied": "कॉपी हो गया!",
+    "rawMarkdown": "कच्चा देखें",
+    "renderedMarkdown": "रेंडर किया देखें"
   },
   "messageInput": {
     "placeholders": {

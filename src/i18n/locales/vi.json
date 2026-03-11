@@ -124,7 +124,11 @@
     "viewDetails": "Xem chi tiết",
     "downloadReport": "Tải báo cáo",
     "download": "Tải xuống",
-    "preview": "Xem trước"
+    "preview": "Xem trước",
+    "copyMarkdown": "Sao chép Markdown",
+    "copied": "Đã sao chép!",
+    "rawMarkdown": "Xem nguồn",
+    "renderedMarkdown": "Xem đã hiển thị"
   },
   "messageInput": {
     "placeholders": {

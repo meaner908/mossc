@@ -124,7 +124,11 @@
     "viewDetails": "查看詳情",
     "downloadReport": "下載報告",
     "download": "下載",
-    "preview": "預覽"
+    "preview": "預覽",
+    "copyMarkdown": "複製 Markdown",
+    "copied": "已複製！",
+    "rawMarkdown": "查看原始內容",
+    "renderedMarkdown": "查看渲染效果"
   },
   "messageInput": {
     "placeholders": {

@@ -124,7 +124,11 @@
     "viewDetails": "عرض التفاصيل",
     "downloadReport": "تنزيل التقرير",
     "download": "تنزيل",
-    "preview": "معاينة"
+    "preview": "معاينة",
+    "copyMarkdown": "نسخ Markdown",
+    "copied": "تم النسخ!",
+    "rawMarkdown": "عرض الخام",
+    "renderedMarkdown": "عرض المُعالَج"
   },
   "messageInput": {
     "placeholders": {
