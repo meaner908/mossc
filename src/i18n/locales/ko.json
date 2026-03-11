@@ -17,7 +17,8 @@
     "meHuman": "나 (인간)",
     "memberCount": "{{count}}명",
     "selectedCount": "{{count}}개 선택됨",
-    "searchPlaceholder": "검색..."
+    "searchPlaceholder": "검색...",
+    "back": "뒤로"
   },
   "nav": {
     "chat": "메시지",

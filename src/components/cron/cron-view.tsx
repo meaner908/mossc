@@ -5,7 +5,6 @@ import { RefreshCw } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Card } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
-import { Separator } from "@/components/ui/separator"
 import { useI18n } from "@/i18n"
 import { useCronJobs, useCronStatus, useCronRuns } from "@/hooks/use-cron"
 import { CronJobCard } from "./cron-job-card"
@@ -89,7 +88,7 @@ export function CronView() {
   return (
     <div className="flex-1 flex flex-col overflow-hidden">
       {/* Header */}
-      <div className="px-6 py-3 border-b">
+      <div className="px-4 py-3 border-b">
         <div className="flex items-center justify-between">
           <h1 className="text-base font-semibold">{t("cronView.title")}</h1>
           <Button
@@ -111,7 +110,7 @@ export function CronView() {
         <div className="p-4 space-y-4 max-w-[960px] mx-auto">
           {/* Status Bar - single compact row */}
           <Card className="px-4 py-3">
-            <div className="flex items-center gap-6 text-sm">
+            <div className="flex flex-wrap items-center gap-x-6 gap-y-2 text-sm">
               <div className="flex items-center gap-2">
                 <span className="text-muted-foreground">{t("cronView.status")}</span>
                 {status?.enabled ? (
@@ -122,12 +121,10 @@ export function CronView() {
                   <Badge variant="secondary" className="text-xs">{t("cronView.disabled")}</Badge>
                 )}
               </div>
-              <Separator orientation="vertical" className="h-4" />
               <div className="flex items-center gap-2">
                 <span className="text-muted-foreground">{t("cronView.jobCount")}</span>
                 <span className="font-semibold">{status?.jobs ?? total}</span>
               </div>
-              <Separator orientation="vertical" className="h-4" />
               <div className="flex items-center gap-2 min-w-0">
                 <span className="text-muted-foreground shrink-0">{t("cronView.nextWake")}</span>
                 <span className="font-medium truncate">

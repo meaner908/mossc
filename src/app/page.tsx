@@ -48,7 +48,7 @@ function MainContent() {
   return (
     <div className="h-screen flex flex-col">
       <TopNav onVersionClick={handleVersionClick} />
-      <main className="flex-1 flex overflow-hidden">
+      <main className="flex-1 flex overflow-hidden pb-14 md:pb-0">
         <NavRail />
         {renderView()}
       </main>

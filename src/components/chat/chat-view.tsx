@@ -5,24 +5,36 @@ import { ConversationList } from "./conversation-list"
 import { ChatWindow } from "./chat-window"
 import { NewConversationDialog } from "./new-conversation-dialog"
 import { CreateAgentDialog } from "@/components/virtual-team/create-agent-dialog"
+import { useApp } from "@/store/app-context"
+import { cn } from "@/lib/utils"
 
 export function ChatView() {
+  const { state } = useApp()
   const [newConvOpen, setNewConvOpen] = useState(false)
   const [newAgentOpen, setNewAgentOpen] = useState(false)
+
+  const hasActiveConversation = !!state.activeConversationId
 
   return (
     <>
       <div className="flex-1 flex overflow-hidden">
-        {/* 左侧对话列表 - 固定宽度，类飞书 */}
-        <div className="shrink-0 w-[280px] overflow-hidden border-r bg-muted/30">
+        {/* On mobile: hidden when a conversation is active; always shown on desktop */}
+        <div className={cn(
+          "shrink-0 overflow-hidden border-r bg-muted/30",
+          "w-full md:w-[280px]",
+          hasActiveConversation ? "hidden md:flex md:flex-col" : "flex flex-col"
+        )}>
           <ConversationList
             onNewConversation={() => setNewConvOpen(true)}
             onNewAgent={() => setNewAgentOpen(true)}
           />
         </div>
 
-        {/* 右侧聊天区 */}
-        <div className="flex-1 flex flex-col min-w-0">
+        {/* On mobile: hidden when no conversation is active; always shown on desktop */}
+        <div className={cn(
+          "flex-1 flex flex-col min-w-0",
+          !hasActiveConversation ? "hidden md:flex" : "flex"
+        )}>
           <ChatWindow />
         </div>
       </div>

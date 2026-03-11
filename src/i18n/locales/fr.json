@@ -17,7 +17,8 @@
     "meHuman": "Moi (humain)",
     "memberCount": "{{count}} membres",
     "selectedCount": "{{count}} sélectionnés",
-    "searchPlaceholder": "Rechercher..."
+    "searchPlaceholder": "Rechercher...",
+    "back": "Retour"
   },
   "nav": {
     "chat": "Messages",

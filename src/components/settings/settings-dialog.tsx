@@ -26,21 +26,51 @@ type SettingsSection = "models" | "language" | "community"
 export function SettingsDialog({ open, onOpenChange }: SettingsDialogProps) {
   const { t } = useI18n()
   const [activeSection, setActiveSection] = useState<SettingsSection>("models")
+  const [mobileShowContent, setMobileShowContent] = useState(false)
+
   const navItems: { id: SettingsSection; label: string; icon: typeof Brain | typeof Languages }[] = [
     { id: "models", label: t("settings.sections.models"), icon: Brain },
     { id: "language", label: t("settings.sections.language"), icon: Languages },
     { id: "community", label: t("settings.sections.community"), icon: Users },
   ]
 
+  const handleSelectSection = (id: SettingsSection) => {
+    setActiveSection(id)
+    setMobileShowContent(true)
+  }
+
+  const handleBack = () => {
+    setMobileShowContent(false)
+  }
+
+  const activeLabel = navItems.find((n) => n.id === activeSection)?.label
+
+  const sectionDescription = {
+    models: t("settings.descriptions.models"),
+    language: t("settings.descriptions.language"),
+    community: t("settings.descriptions.community"),
+  }[activeSection]
+
+  const handleOpenChange = (o: boolean) => {
+    if (!o) {
+      setMobileShowContent(false)
+    }
+    onOpenChange(o)
+  }
+
   return (
-    <Dialog open={open} onOpenChange={onOpenChange}>
+    <Dialog open={open} onOpenChange={handleOpenChange}>
       <DialogContent
         showCloseButton={false}
-        className="w-[80vw] !max-w-[1000px] h-[80vh] p-0 gap-0 overflow-hidden"
+        className="w-full h-[100dvh] max-w-full rounded-none p-0 gap-0 overflow-hidden md:w-[80vw] md:!max-w-[1000px] md:h-[80vh] md:rounded-xl"
       >
         <div className="flex h-full overflow-hidden">
-          {/* Sidebar */}
-          <nav className="w-48 shrink-0 border-r bg-muted/30 flex flex-col">
+          {/* Sidebar – always visible on desktop; on mobile only shown when not in content view */}
+          <nav className={cn(
+            "shrink-0 border-r bg-muted/30 flex flex-col",
+            "w-full md:w-48",
+            mobileShowContent ? "hidden md:flex" : "flex"
+          )}>
             <div className="px-3 py-3 border-b">
               <button
                 onClick={() => onOpenChange(false)}
@@ -54,52 +84,49 @@ export function SettingsDialog({ open, onOpenChange }: SettingsDialogProps) {
               {navItems.map((item) => (
                 <button
                   key={item.id}
-                  onClick={() => setActiveSection(item.id)}
+                  onClick={() => handleSelectSection(item.id)}
                   className={cn(
-                    "flex items-center gap-2 w-full rounded-md px-2.5 py-1.5 text-sm transition-colors",
+                    "flex items-center gap-2 w-full rounded-md px-2.5 py-2 text-sm transition-colors",
                     activeSection === item.id
                       ? "bg-primary/10 text-primary font-medium"
                       : "text-muted-foreground hover:bg-muted hover:text-foreground"
                   )}
                 >
-                  <item.icon className="h-4 w-4" />
+                  <item.icon className="h-4 w-4 shrink-0" />
                   {item.label}
                 </button>
               ))}
             </div>
           </nav>
 
-          {/* Content */}
-            <div className="flex-1 min-w-0 min-h-0 flex flex-col">
-              <div className="px-5 py-4 border-b shrink-0">
-                <h2 className="text-base font-medium">
-                  {navItems.find((n) => n.id === activeSection)?.label}
-                </h2>
-                {activeSection === "models" && (
-                  <p className="text-xs text-muted-foreground mt-0.5">
-                    {t("settings.descriptions.models")}
-                  </p>
-                )}
-                {activeSection === "language" && (
-                  <p className="text-xs text-muted-foreground mt-0.5">
-                    {t("settings.descriptions.language")}
-                  </p>
-                )}
-                {activeSection === "community" && (
-                  <p className="text-xs text-muted-foreground mt-0.5">
-                    {t("settings.descriptions.community")}
-                  </p>
-                )}
-              </div>
-
-              <div className="flex-1 min-h-0 overflow-y-auto">
-                <div className="px-5 py-4">
-                  {activeSection === "models" && <ModelConfigPanel />}
-                  {activeSection === "language" && <LanguageSettingsPanel />}
-                  {activeSection === "community" && <CommunityPanel />}
-                </div>
+          {/* Content – always visible on desktop; on mobile only shown when mobileShowContent */}
+          <div className={cn(
+            "flex-1 min-w-0 min-h-0 flex flex-col",
+            !mobileShowContent ? "hidden md:flex" : "flex"
+          )}>
+            <div className="px-4 py-3 border-b shrink-0 flex items-center gap-2">
+              {/* Mobile back button */}
+              <button
+                className="md:hidden flex items-center justify-center h-7 w-7 rounded-md text-muted-foreground hover:bg-accent transition-colors shrink-0"
+                onClick={handleBack}
+                aria-label={t("common.back")}
+              >
+                <ArrowLeft className="h-4 w-4" />
+              </button>
+              <div>
+                <h2 className="text-base font-medium">{activeLabel}</h2>
+                <p className="text-xs text-muted-foreground mt-0.5">{sectionDescription}</p>
               </div>
             </div>
+
+            <div className="flex-1 min-h-0 overflow-y-auto">
+              <div className="px-4 py-4">
+                {activeSection === "models" && <ModelConfigPanel />}
+                {activeSection === "language" && <LanguageSettingsPanel />}
+                {activeSection === "community" && <CommunityPanel />}
+              </div>
+            </div>
+          </div>
         </div>
       </DialogContent>
     </Dialog>

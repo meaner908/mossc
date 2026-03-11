@@ -17,7 +17,8 @@
     "meHuman": "मैं (मानव)",
     "memberCount": "{{count}} सदस्य",
     "selectedCount": "{{count}} चुने गए",
-    "searchPlaceholder": "खोजें..."
+    "searchPlaceholder": "खोजें...",
+    "back": "वापस"
   },
   "nav": {
     "chat": "संदेश",

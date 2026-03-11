@@ -17,7 +17,8 @@
     "meHuman": "我（人類）",
     "memberCount": "{{count}} 位成員",
     "selectedCount": "已選 {{count}} 位",
-    "searchPlaceholder": "搜尋..."
+    "searchPlaceholder": "搜尋...",
+    "back": "返回"
   },
   "nav": {
     "chat": "訊息",

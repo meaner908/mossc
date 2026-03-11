@@ -17,7 +17,8 @@
     "meHuman": "Я (человек)",
     "memberCount": "{{count}} участников",
     "selectedCount": "Выбрано: {{count}}",
-    "searchPlaceholder": "Поиск..."
+    "searchPlaceholder": "Поиск...",
+    "back": "Назад"
   },
   "nav": {
     "chat": "Сообщения",

@@ -106,8 +106,34 @@ export function NavRail() {
     },
   ]
 
+  const navItemButton = (item: NavItem) => (
+    <button
+      key={item.id}
+      aria-disabled={item.unavailable}
+      onClick={() => {
+        if (item.unavailable) {
+          toast.info(t("header.unavailableAction", { action: item.label }))
+          return
+        }
+        dispatch({ type: "SET_VIEW", payload: item.id })
+      }}
+      className={cn(
+        "flex flex-col items-center justify-center gap-0.5 flex-1 py-1 h-full transition-colors",
+        item.unavailable
+          ? "cursor-not-allowed opacity-45 text-muted-foreground"
+          : "hover:bg-accent",
+        !item.unavailable && state.view === item.id
+          ? "text-primary"
+          : "text-muted-foreground"
+      )}
+    >
+      {item.icon}
+      <span className="text-[10px] leading-none">{item.label}</span>
+    </button>
+  )
+
   return (
-    <div className="shrink-0 w-[56px] flex flex-col items-center border-r bg-muted/50 py-3 gap-1">
+    <>
       <input
         ref={fileInputRef}
         type="file"
@@ -116,86 +142,103 @@ export function NavRail() {
         onChange={handleUserAvatarChange}
       />
 
-      {/* User Avatar */}
-      <Tooltip>
-        <TooltipTrigger
-          render={
-            <button
-              type="button"
-              className="mb-2 rounded-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring disabled:cursor-not-allowed"
-              onClick={() => setAvatarConfirmOpen(true)}
-              disabled={avatarUploading}
-            />
-          }
-        >
-          <div className="relative">
-            <Avatar className="h-9 w-9">
-              <AvatarImage src={getUserAvatarUrl()} alt={t("common.me")} />
-              <AvatarFallback className="text-xs font-medium bg-green-100 text-green-700">
-                {t("common.me")}
-              </AvatarFallback>
-            </Avatar>
-            {avatarUploading && (
-              <span className="absolute inset-0 flex items-center justify-center rounded-full bg-black/35 text-white">
-                <Loader2 className="h-4 w-4 animate-spin" />
-              </span>
-            )}
-          </div>
-        </TooltipTrigger>
-        <TooltipContent side="right">{t("nav.changeMyAvatar")}</TooltipContent>
-      </Tooltip>
-
-      {/* Nav Items */}
-      {navItems.map((item) => (
-        <Tooltip key={item.id}>
+      {/* Desktop: left sidebar */}
+      <div className="hidden md:flex shrink-0 w-[56px] flex-col items-center border-r bg-muted/50 py-3 gap-1">
+        {/* User Avatar */}
+        <Tooltip>
           <TooltipTrigger
             render={
               <button
-                aria-disabled={item.unavailable}
-                onClick={() => {
-                  if (item.unavailable) {
-                    toast.info(t("header.unavailableAction", { action: item.label }))
-                    return
-                  }
-                  dispatch({ type: "SET_VIEW", payload: item.id })
-                }}
-                className={cn(
-                  "flex items-center justify-center w-10 h-10 rounded-lg transition-colors",
-                  item.unavailable
-                    ? "cursor-not-allowed opacity-45 text-muted-foreground"
-                    : "hover:bg-accent",
-                  !item.unavailable && state.view === item.id
-                    ? "bg-accent text-primary"
-                    : "text-muted-foreground"
-                )}
+                type="button"
+                className="mb-2 rounded-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring disabled:cursor-not-allowed"
+                onClick={() => setAvatarConfirmOpen(true)}
+                disabled={avatarUploading}
               />
             }
           >
-            {item.icon}
+            <div className="relative">
+              <Avatar className="h-9 w-9">
+                <AvatarImage src={getUserAvatarUrl()} alt={t("common.me")} />
+                <AvatarFallback className="text-xs font-medium bg-green-100 text-green-700">
+                  {t("common.me")}
+                </AvatarFallback>
+              </Avatar>
+              {avatarUploading && (
+                <span className="absolute inset-0 flex items-center justify-center rounded-full bg-black/35 text-white">
+                  <Loader2 className="h-4 w-4 animate-spin" />
+                </span>
+              )}
+            </div>
           </TooltipTrigger>
-          <TooltipContent side="right">{item.label}</TooltipContent>
+          <TooltipContent side="right">{t("nav.changeMyAvatar")}</TooltipContent>
         </Tooltip>
-      ))}
 
-      {/* Spacer */}
-      <div className="flex-1" />
+        {/* Nav Items */}
+        {navItems.map((item) => (
+          <Tooltip key={item.id}>
+            <TooltipTrigger
+              render={
+                <button
+                  aria-disabled={item.unavailable}
+                  onClick={() => {
+                    if (item.unavailable) {
+                      toast.info(t("header.unavailableAction", { action: item.label }))
+                      return
+                    }
+                    dispatch({ type: "SET_VIEW", payload: item.id })
+                  }}
+                  className={cn(
+                    "flex items-center justify-center w-10 h-10 rounded-lg transition-colors",
+                    item.unavailable
+                      ? "cursor-not-allowed opacity-45 text-muted-foreground"
+                      : "hover:bg-accent",
+                    !item.unavailable && state.view === item.id
+                      ? "bg-accent text-primary"
+                      : "text-muted-foreground"
+                  )}
+                />
+              }
+            >
+              {item.icon}
+            </TooltipTrigger>
+            <TooltipContent side="right">{item.label}</TooltipContent>
+          </Tooltip>
+        ))}
 
-      {/* Settings at bottom */}
-      <Tooltip>
-        <TooltipTrigger
-          render={
-            <Button
-              variant="ghost"
-              size="icon"
-              className="h-10 w-10 rounded-lg text-muted-foreground hover:bg-accent"
-              onClick={() => setSettingsOpen(true)}
-            />
-          }
+        {/* Spacer */}
+        <div className="flex-1" />
+
+        {/* Settings at bottom */}
+        <Tooltip>
+          <TooltipTrigger
+            render={
+              <Button
+                variant="ghost"
+                size="icon"
+                className="h-10 w-10 rounded-lg text-muted-foreground hover:bg-accent"
+                onClick={() => setSettingsOpen(true)}
+              />
+            }
+          >
+            <Settings className="h-5 w-5" />
+          </TooltipTrigger>
+          <TooltipContent side="right">{t("nav.settings")}</TooltipContent>
+        </Tooltip>
+      </div>
+
+      {/* Mobile: fixed bottom navigation bar */}
+      <div className="md:hidden fixed bottom-0 left-0 right-0 h-14 flex flex-row items-stretch border-t bg-background z-50">
+        {navItems.map((item) => navItemButton(item))}
+        <button
+          className={cn(
+            "flex flex-col items-center justify-center gap-0.5 flex-1 py-1 h-full transition-colors text-muted-foreground hover:bg-accent"
+          )}
+          onClick={() => setSettingsOpen(true)}
         >
           <Settings className="h-5 w-5" />
-        </TooltipTrigger>
-        <TooltipContent side="right">{t("nav.settings")}</TooltipContent>
-      </Tooltip>
+          <span className="text-[10px] leading-none">{t("nav.settings")}</span>
+        </button>
+      </div>
 
       <SettingsDialog open={settingsOpen} onOpenChange={setSettingsOpen} />
 
@@ -215,6 +258,6 @@ export function NavRail() {
           </AlertDialogFooter>
         </AlertDialogContent>
       </AlertDialog>
-    </div>
+    </>
   )
 }

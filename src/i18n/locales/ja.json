@@ -17,7 +17,8 @@
     "meHuman": "私（人間）",
     "memberCount": "{{count}}人のメンバー",
     "selectedCount": "{{count}}件選択",
-    "searchPlaceholder": "検索..."
+    "searchPlaceholder": "検索...",
+    "back": "戻る"
   },
   "nav": {
     "chat": "メッセージ",

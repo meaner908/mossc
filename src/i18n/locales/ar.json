@@ -17,7 +17,8 @@
     "meHuman": "أنا (بشري)",
     "memberCount": "{{count}} أعضاء",
     "selectedCount": "{{count}} محدد",
-    "searchPlaceholder": "بحث..."
+    "searchPlaceholder": "بحث...",
+    "back": "رجوع"
   },
   "nav": {
     "chat": "الرسائل",

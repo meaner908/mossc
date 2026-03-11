@@ -17,7 +17,8 @@
     "meHuman": "Tôi (người)",
     "memberCount": "{{count}} thành viên",
     "selectedCount": "Đã chọn {{count}}",
-    "searchPlaceholder": "Tìm kiếm..."
+    "searchPlaceholder": "Tìm kiếm...",
+    "back": "Quay lại"
   },
   "nav": {
     "chat": "Tin nhắn",

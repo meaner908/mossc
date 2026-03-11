@@ -17,7 +17,8 @@
     "meHuman": "我（人类）",
     "memberCount": "{{count}} 位成员",
     "selectedCount": "已选 {{count}} 位",
-    "searchPlaceholder": "搜索..."
+    "searchPlaceholder": "搜索...",
+    "back": "返回"
   },
   "nav": {
     "chat": "消息",

@@ -37,6 +37,10 @@ export async function generateMetadata(): Promise<Metadata> {
       shortcut: "/mossclogo.png",
       apple: "/mossclogo.png",
     },
+    viewport: {
+      width: "device-width",
+      initialScale: 1,
+    },
   }
 }
 

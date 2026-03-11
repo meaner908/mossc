@@ -1,6 +1,6 @@
 "use client"
 
-import { Loader2, MoreHorizontal, Phone, Search, Trash2, Users, Video } from "lucide-react"
+import { ArrowLeft, Loader2, MoreHorizontal, Phone, Search, Trash2, Users, Video } from "lucide-react"
 import { useState } from "react"
 import { toast } from "sonner"
 import {
@@ -74,6 +74,14 @@ export function ChatHeader({ conversation, onToggleMembers, onAgentAvatarClick }
 
   return (
     <div className="flex items-center justify-between px-4 py-2.5 border-b bg-background">
+      {/* Mobile back button */}
+      <button
+        className="md:hidden mr-2 shrink-0 flex items-center justify-center h-8 w-8 rounded-md text-muted-foreground hover:bg-accent transition-colors"
+        onClick={() => dispatch({ type: "SET_ACTIVE_CONVERSATION", payload: null })}
+        aria-label={t("common.back")}
+      >
+        <ArrowLeft className="h-5 w-5" />
+      </button>
       <div className="flex items-center gap-3 min-w-0">
         {isGroup ? (
           <GroupAvatar

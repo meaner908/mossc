@@ -67,7 +67,7 @@ export function TopNav({ onVersionClick }: TopNavProps) {
 
   return (
     <header className="flex h-14 items-center border-b bg-background px-4 gap-4">
-      <div className="flex items-center">
+      <div className="flex items-center shrink-0">
         <Image src="/mossclogo.png" alt="MossC" width={140} height={32} className="h-8 w-auto" priority />
       </div>
 
@@ -86,8 +86,8 @@ export function TopNav({ onVersionClick }: TopNavProps) {
           ) : (
             <WifiOff className="h-3.5 w-3.5" />
           )}
-          <span>{connInfo.label}</span>
-          {versionLabel ? <span className="text-muted-foreground">{versionLabel}</span> : null}
+          <span className="hidden sm:inline">{connInfo.label}</span>
+          {versionLabel ? <span className="hidden md:inline text-muted-foreground">{versionLabel}</span> : null}
           <ChevronDown className="h-3 w-3 text-muted-foreground" />
         </DropdownMenuTrigger>
 
@@ -159,7 +159,7 @@ export function TopNav({ onVersionClick }: TopNavProps) {
             className={cn(buttonVariants({ variant: "ghost", size: "sm" }), "h-8 text-muted-foreground")}
           >
             <Bug className="h-4 w-4" />
-            <span>{t("header.bugFeedback")}</span>
+            <span className="hidden sm:inline">{t("header.bugFeedback")}</span>
           </a>
         ) : null}
       </div>
