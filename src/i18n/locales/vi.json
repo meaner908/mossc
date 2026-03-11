@@ -8,16 +8,17 @@
     "create": "Tạo",
     "creating": "Đang tạo",
     "save": "Lưu",
-    "saving": "Đang lưu",
+    "saving": "Đang lưu...",
     "confirm": "Xác nhận",
     "delete": "Xóa",
     "deleting": "Đang xóa",
     "justNow": "Vừa xong",
-    "me": "Tôi",
+    "me": "tôi",
     "meHuman": "Tôi (người)",
     "memberCount": "{{count}} thành viên",
     "selectedCount": "Đã chọn {{count}}",
-    "searchPlaceholder": "Tìm kiếm..."
+    "searchPlaceholder": "Tìm kiếm...",
+    "loading": "Đang tải..."
   },
   "nav": {
     "chat": "Tin nhắn",
@@ -40,12 +41,14 @@
     "sections": {
       "models": "Cấu hình mô hình",
       "language": "Ngôn ngữ",
-      "community": "Cộng đồng"
+      "community": "Cộng đồng",
+      "users": "Người dùng"
     },
     "descriptions": {
       "models": "Thêm nhà cung cấp AI và cấu hình các mô hình khả dụng",
       "language": "Mặc định theo ngôn ngữ trình duyệt, và bạn cũng có thể chuyển thủ công",
-      "community": "Tham gia nhóm WeChat chính thức để nhận cập nhật và hỗ trợ"
+      "community": "Tham gia nhóm WeChat chính thức để nhận cập nhật và hỗ trợ",
+      "users": "Quản lý tài khoản và quyền người dùng."
     },
     "community": {
       "title": "Cộng đồng chính thức",
@@ -291,6 +294,35 @@
     "error": "Mật khẩu không đúng. Vui lòng thử lại.",
     "networkError": "Lỗi mạng. Vui lòng kiểm tra kết nối và thử lại.",
     "logout": "Đăng xuất",
-    "loggingOut": "Đang đăng xuất..."
+    "loggingOut": "Đang đăng xuất...",
+    "usernameLabel": "Tên người dùng",
+    "usernamePlaceholder": "Nhập tên người dùng"
+  },
+  "setup": {
+    "title": "Tạo tài khoản quản trị",
+    "description": "Thiết lập tài khoản quản trị đầu tiên để bảo mật MossC của bạn.",
+    "passwordPlaceholder": "Ít nhất 8 ký tự",
+    "confirmPasswordLabel": "Xác nhận mật khẩu",
+    "confirmPasswordPlaceholder": "Nhập lại mật khẩu",
+    "passwordMismatch": "Mật khẩu không khớp.",
+    "error": "Tạo tài khoản quản trị thất bại.",
+    "submit": "Tạo tài khoản",
+    "creating": "Đang tạo..."
+  },
+  "userManagement": {
+    "addUser": "Thêm người dùng",
+    "createUser": "Tạo",
+    "createFailed": "Tạo người dùng thất bại.",
+    "userList": "Người dùng",
+    "userCount": "{{count}} tài khoản",
+    "noUsers": "Chưa có người dùng.",
+    "roleLabel": "Vai trò",
+    "roleAdmin": "Quản trị",
+    "roleUser": "Người dùng",
+    "changePassword": "Đổi mật khẩu",
+    "changePasswordFailed": "Cập nhật mật khẩu thất bại.",
+    "passwordChanged": "Mật khẩu đã được cập nhật.",
+    "deleteUser": "Xóa người dùng",
+    "cannotDeleteSelf": "Không thể xóa tài khoản của chính mình."
   }
 }

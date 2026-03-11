@@ -8,16 +8,17 @@
     "create": "Créer",
     "creating": "Création",
     "save": "Enregistrer",
-    "saving": "Enregistrement",
+    "saving": "Enregistrement...",
     "confirm": "Confirmer",
     "delete": "Supprimer",
     "deleting": "Suppression",
     "justNow": "À l'instant",
-    "me": "Moi",
+    "me": "moi",
     "meHuman": "Moi (humain)",
     "memberCount": "{{count}} membres",
     "selectedCount": "{{count}} sélectionnés",
-    "searchPlaceholder": "Rechercher..."
+    "searchPlaceholder": "Rechercher...",
+    "loading": "Chargement..."
   },
   "nav": {
     "chat": "Messages",
@@ -40,12 +41,14 @@
     "sections": {
       "models": "Config modèles",
       "language": "Langue",
-      "community": "Communauté"
+      "community": "Communauté",
+      "users": "Utilisateurs"
     },
     "descriptions": {
       "models": "Ajoutez des fournisseurs IA et configurez les modèles disponibles",
       "language": "Suit la langue du navigateur par défaut, avec possibilité de changement manuel",
-      "community": "Rejoignez le groupe WeChat officiel pour les dernières nouvelles et le support"
+      "community": "Rejoignez le groupe WeChat officiel pour les dernières nouvelles et le support",
+      "users": "Gérer les comptes utilisateurs et les permissions."
     },
     "community": {
       "title": "Communauté officielle",
@@ -291,6 +294,35 @@
     "error": "Mot de passe incorrect. Veuillez réessayer.",
     "networkError": "Erreur réseau. Vérifiez votre connexion et réessayez.",
     "logout": "Se déconnecter",
-    "loggingOut": "Déconnexion..."
+    "loggingOut": "Déconnexion...",
+    "usernameLabel": "Nom d'utilisateur",
+    "usernamePlaceholder": "Entrez le nom d'utilisateur"
+  },
+  "setup": {
+    "title": "Créer un compte administrateur",
+    "description": "Configurez le premier compte administrateur pour sécuriser votre instance MossC.",
+    "passwordPlaceholder": "Au moins 8 caractères",
+    "confirmPasswordLabel": "Confirmer le mot de passe",
+    "confirmPasswordPlaceholder": "Ressaisir le mot de passe",
+    "passwordMismatch": "Les mots de passe ne correspondent pas.",
+    "error": "Échec de la création du compte administrateur.",
+    "submit": "Créer le compte",
+    "creating": "Création..."
+  },
+  "userManagement": {
+    "addUser": "Ajouter un utilisateur",
+    "createUser": "Créer",
+    "createFailed": "Échec de la création de l'utilisateur.",
+    "userList": "Utilisateurs",
+    "userCount": "{{count}} compte(s)",
+    "noUsers": "Aucun utilisateur.",
+    "roleLabel": "Rôle",
+    "roleAdmin": "Administrateur",
+    "roleUser": "Utilisateur",
+    "changePassword": "Changer le mot de passe",
+    "changePasswordFailed": "Échec de la mise à jour du mot de passe.",
+    "passwordChanged": "Mot de passe mis à jour.",
+    "deleteUser": "Supprimer l'utilisateur",
+    "cannotDeleteSelf": "Impossible de supprimer votre propre compte."
   }
 }

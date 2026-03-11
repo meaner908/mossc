@@ -94,6 +94,7 @@ export class ControlPlaneRuntime {
 
 type GlobalControlPlaneState = typeof globalThis & {
   __openclawStudioControlPlaneRuntime?: ControlPlaneRuntime;
+  __openclawStudioUserRuntimes?: Map<string, ControlPlaneRuntime>;
 };
 
 export const getControlPlaneRuntime = (options?: ControlPlaneRuntimeOptions): ControlPlaneRuntime => {
@@ -109,9 +110,32 @@ export const peekControlPlaneRuntime = (): ControlPlaneRuntime | null => {
   return globalState.__openclawStudioControlPlaneRuntime ?? null;
 };
 
+/** Returns (or creates) a per-user runtime keyed by userId. */
+export const getControlPlaneRuntimeForUser = (
+  userId: string,
+  options?: ControlPlaneRuntimeOptions
+): ControlPlaneRuntime => {
+  const globalState = globalThis as GlobalControlPlaneState;
+  if (!globalState.__openclawStudioUserRuntimes) {
+    globalState.__openclawStudioUserRuntimes = new Map();
+  }
+  const existing = globalState.__openclawStudioUserRuntimes.get(userId);
+  if (existing) return existing;
+  const runtime = new ControlPlaneRuntime(options);
+  globalState.__openclawStudioUserRuntimes.set(userId, runtime);
+  return runtime;
+};
+
+/** Returns the per-user runtime if it exists, without creating one. */
+export const peekControlPlaneRuntimeForUser = (userId: string): ControlPlaneRuntime | null => {
+  const globalState = globalThis as GlobalControlPlaneState;
+  return globalState.__openclawStudioUserRuntimes?.get(userId) ?? null;
+};
+
 export const resetControlPlaneRuntimeForTests = (): void => {
   const globalState = globalThis as GlobalControlPlaneState;
   delete globalState.__openclawStudioControlPlaneRuntime;
+  globalState.__openclawStudioUserRuntimes?.clear();
 };
 
 export const isStudioDomainApiModeEnabled = (): boolean => {

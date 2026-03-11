@@ -40,13 +40,15 @@ export function TopNav({ onVersionClick }: TopNavProps) {
   const router = useRouter()
   const { summary, loadSummary } = useConnectionSummary()
   const [gatewayDialogOpen, setGatewayDialogOpen] = useState(false)
-  const [authEnabled, setAuthEnabled] = useState(false)
+  const [currentUser, setCurrentUser] = useState<{ id: string; username: string; role: "admin" | "user" } | null>(null)
   const [loggingOut, setLoggingOut] = useState(false)
 
   useEffect(() => {
-    fetch("/api/auth/status")
-      .then((res) => res.json() as Promise<{ authEnabled: boolean }>)
-      .then((data) => setAuthEnabled(data.authEnabled))
+    fetch("/api/auth/me")
+      .then((res) => res.json() as Promise<{ id?: string; username?: string; role?: string }>)
+      .then((data) => {
+        if (data.id) setCurrentUser({ id: data.id, username: data.username ?? "", role: (data.role ?? "user") as "admin" | "user" })
+      })
       .catch(() => { /* ignore */ })
   }, [])
 
@@ -182,14 +184,14 @@ export function TopNav({ onVersionClick }: TopNavProps) {
             <span>{t("header.bugFeedback")}</span>
           </a>
         ) : null}
-        {authEnabled && (
+        {currentUser && (
           <button
             onClick={() => void handleLogout()}
             disabled={loggingOut}
-            title={loggingOut ? t("login.loggingOut") : t("login.logout")}
+            title={loggingOut ? t("login.loggingOut") : `${currentUser.username} — ${t("login.logout")}`}
             className={cn(
-              buttonVariants({ variant: "ghost", size: "icon" }),
-              "h-8 w-8 text-muted-foreground disabled:opacity-50"
+              buttonVariants({ variant: "ghost", size: "sm" }),
+              "h-8 text-muted-foreground gap-1.5 disabled:opacity-50"
             )}
           >
             {loggingOut ? (
@@ -197,6 +199,7 @@ export function TopNav({ onVersionClick }: TopNavProps) {
             ) : (
               <LogOut className="h-4 w-4" />
             )}
+            <span className="text-xs max-w-24 truncate">{currentUser.username}</span>
           </button>
         )}
       </div>

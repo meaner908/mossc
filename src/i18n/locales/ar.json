@@ -8,7 +8,7 @@
     "create": "إنشاء",
     "creating": "جارٍ الإنشاء",
     "save": "حفظ",
-    "saving": "جارٍ الحفظ",
+    "saving": "جارٍ الحفظ...",
     "confirm": "تأكيد",
     "delete": "حذف",
     "deleting": "جارٍ الحذف",
@@ -17,7 +17,8 @@
     "meHuman": "أنا (بشري)",
     "memberCount": "{{count}} أعضاء",
     "selectedCount": "{{count}} محدد",
-    "searchPlaceholder": "بحث..."
+    "searchPlaceholder": "بحث...",
+    "loading": "جارٍ التحميل..."
   },
   "nav": {
     "chat": "الرسائل",
@@ -40,12 +41,14 @@
     "sections": {
       "models": "إعدادات النماذج",
       "language": "اللغة",
-      "community": "المجتمع"
+      "community": "المجتمع",
+      "users": "المستخدمون"
     },
     "descriptions": {
       "models": "أضف مزوّدي الذكاء الاصطناعي واضبط النماذج المتاحة",
       "language": "يتبع لغة المتصفح افتراضيًا مع إمكانية التبديل اليدوي",
-      "community": "انضم إلى مجموعة WeChat الرسمية للحصول على التحديثات والدعم"
+      "community": "انضم إلى مجموعة WeChat الرسمية للحصول على التحديثات والدعم",
+      "users": "إدارة حسابات المستخدمين والأذونات."
     },
     "community": {
       "title": "المجتمع الرسمي",
@@ -291,6 +294,35 @@
     "error": "كلمة المرور غير صحيحة. يرجى المحاولة مرة أخرى.",
     "networkError": "خطأ في الشبكة. تحقق من اتصالك وحاول مرة أخرى.",
     "logout": "تسجيل الخروج",
-    "loggingOut": "جارٍ تسجيل الخروج..."
+    "loggingOut": "جارٍ تسجيل الخروج...",
+    "usernameLabel": "اسم المستخدم",
+    "usernamePlaceholder": "أدخل اسم المستخدم"
+  },
+  "setup": {
+    "title": "إنشاء حساب المسؤول",
+    "description": "إعداد حساب المسؤول الأول لتأمين مثيل MossC الخاص بك.",
+    "passwordPlaceholder": "8 أحرف على الأقل",
+    "confirmPasswordLabel": "تأكيد كلمة المرور",
+    "confirmPasswordPlaceholder": "أعد إدخال كلمة المرور",
+    "passwordMismatch": "كلمتا المرور غير متطابقتين.",
+    "error": "فشل إنشاء حساب المسؤول.",
+    "submit": "إنشاء الحساب",
+    "creating": "جارٍ الإنشاء..."
+  },
+  "userManagement": {
+    "addUser": "إضافة مستخدم",
+    "createUser": "إنشاء",
+    "createFailed": "فشل إنشاء المستخدم.",
+    "userList": "المستخدمون",
+    "userCount": "{{count}} حساب (حسابات)",
+    "noUsers": "لا يوجد مستخدمون.",
+    "roleLabel": "الدور",
+    "roleAdmin": "مسؤول",
+    "roleUser": "مستخدم",
+    "changePassword": "تغيير كلمة المرور",
+    "changePasswordFailed": "فشل تحديث كلمة المرور.",
+    "passwordChanged": "تم تحديث كلمة المرور.",
+    "deleteUser": "حذف المستخدم",
+    "cannotDeleteSelf": "لا يمكن حذف حسابك الخاص."
   }
 }

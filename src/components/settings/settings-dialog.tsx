@@ -1,7 +1,7 @@
 "use client"
 
-import { useState } from "react"
-import { ArrowLeft, Brain, Check, Languages, Users } from "lucide-react"
+import { useEffect, useState } from "react"
+import { ArrowLeft, Brain, Check, Languages, ShieldCheck, Users } from "lucide-react"
 import {
   Dialog,
   DialogContent,
@@ -15,21 +15,40 @@ import {
 } from "@/i18n"
 import { cn } from "@/lib/utils"
 import { ModelConfigPanel } from "./model-config"
+import { UsersPanel } from "@/components/admin/users-panel"
 
 interface SettingsDialogProps {
   open: boolean
   onOpenChange: (open: boolean) => void
 }
 
-type SettingsSection = "models" | "language" | "community"
+type SettingsSection = "models" | "language" | "community" | "users"
+
+type CurrentUser = { id: string; username: string; role: "admin" | "user" }
 
 export function SettingsDialog({ open, onOpenChange }: SettingsDialogProps) {
   const { t } = useI18n()
   const [activeSection, setActiveSection] = useState<SettingsSection>("models")
-  const navItems: { id: SettingsSection; label: string; icon: typeof Brain | typeof Languages }[] = [
+  const [currentUser, setCurrentUser] = useState<CurrentUser | null>(null)
+
+  useEffect(() => {
+    if (!open) return
+    fetch("/api/auth/me")
+      .then((r) => r.json() as Promise<CurrentUser>)
+      .then((u) => setCurrentUser(u))
+      .catch(() => {})
+  }, [open])
+
+  const isAdmin = currentUser?.role === "admin"
+
+  type NavItem = { id: SettingsSection; label: string; icon: typeof Brain | typeof Languages | typeof ShieldCheck }
+  const navItems: NavItem[] = [
     { id: "models", label: t("settings.sections.models"), icon: Brain },
     { id: "language", label: t("settings.sections.language"), icon: Languages },
     { id: "community", label: t("settings.sections.community"), icon: Users },
+    ...(isAdmin
+      ? [{ id: "users" as SettingsSection, label: t("settings.sections.users"), icon: ShieldCheck }]
+      : []),
   ]
 
   return (
@@ -90,6 +109,11 @@ export function SettingsDialog({ open, onOpenChange }: SettingsDialogProps) {
                     {t("settings.descriptions.community")}
                   </p>
                 )}
+                {activeSection === "users" && (
+                  <p className="text-xs text-muted-foreground mt-0.5">
+                    {t("settings.descriptions.users")}
+                  </p>
+                )}
               </div>
 
               <div className="flex-1 min-h-0 overflow-y-auto">
@@ -97,6 +121,9 @@ export function SettingsDialog({ open, onOpenChange }: SettingsDialogProps) {
                   {activeSection === "models" && <ModelConfigPanel />}
                   {activeSection === "language" && <LanguageSettingsPanel />}
                   {activeSection === "community" && <CommunityPanel />}
+                  {activeSection === "users" && currentUser && (
+                    <UsersPanel currentUserId={currentUser.id} />
+                  )}
                 </div>
               </div>
             </div>

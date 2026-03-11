@@ -1,7 +1,8 @@
 import { NextResponse } from "next/server";
 
 import { OpenClawGatewayAdapter } from "@/lib/controlplane/openclaw-adapter";
-import { loadStudioSettings } from "@/lib/studio/settings-store";
+import { loadUserStudioSettings } from "@/lib/studio/settings-store";
+import { getCurrentUser } from "@/lib/user-context";
 
 export const runtime = "nodejs";
 
@@ -15,11 +16,13 @@ type TestConnectionRequestBody = {
 
 const readString = (value: unknown): string => (typeof value === "string" ? value.trim() : "");
 
-const resolveStoredToken = (): string => {
-  return readString(loadStudioSettings().gateway?.token);
-};
-
 export async function POST(request: Request) {
+  const user = await getCurrentUser();
+  const userId = user?.id ?? "system";
+
+  const resolveStoredToken = (): string =>
+    readString(loadUserStudioSettings(userId).gateway?.token);
+
   let adapter: OpenClawGatewayAdapter | null = null;
   try {
     const body = (await request.json()) as TestConnectionRequestBody;

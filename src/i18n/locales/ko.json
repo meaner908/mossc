@@ -8,7 +8,7 @@
     "create": "생성",
     "creating": "생성 중",
     "save": "저장",
-    "saving": "저장 중",
+    "saving": "저장 중...",
     "confirm": "확인",
     "delete": "삭제",
     "deleting": "삭제 중",
@@ -17,7 +17,8 @@
     "meHuman": "나 (인간)",
     "memberCount": "{{count}}명",
     "selectedCount": "{{count}}개 선택됨",
-    "searchPlaceholder": "검색..."
+    "searchPlaceholder": "검색...",
+    "loading": "로딩 중..."
   },
   "nav": {
     "chat": "메시지",
@@ -40,12 +41,14 @@
     "sections": {
       "models": "모델 설정",
       "language": "언어",
-      "community": "커뮤니티"
+      "community": "커뮤니티",
+      "users": "사용자 관리"
     },
     "descriptions": {
       "models": "AI 제공자를 추가하고 사용 가능한 모델을 설정합니다",
       "language": "기본적으로 브라우저 언어를 따르며, 수동으로 변경할 수도 있습니다",
-      "community": "공식 WeChat 그룹에 참여하여 최신 소식과 지원을 받으세요"
+      "community": "공식 WeChat 그룹에 참여하여 최신 소식과 지원을 받으세요",
+      "users": "사용자 계정 및 권한을 관리합니다."
     },
     "community": {
       "title": "공식 커뮤니티",
@@ -291,6 +294,35 @@
     "error": "비밀번호가 올바르지 않습니다. 다시 시도해주세요.",
     "networkError": "네트워크 오류입니다. 연결을 확인하고 다시 시도해주세요.",
     "logout": "로그아웃",
-    "loggingOut": "로그아웃 중..."
+    "loggingOut": "로그아웃 중...",
+    "usernameLabel": "사용자 이름",
+    "usernamePlaceholder": "사용자 이름 입력"
+  },
+  "setup": {
+    "title": "관리자 계정 만들기",
+    "description": "MossC 인스턴스를 보호하기 위한 첫 번째 관리자 계정을 설정합니다.",
+    "passwordPlaceholder": "8자 이상",
+    "confirmPasswordLabel": "비밀번호 확인",
+    "confirmPasswordPlaceholder": "비밀번호 재입력",
+    "passwordMismatch": "비밀번호가 일치하지 않습니다.",
+    "error": "관리자 계정 생성에 실패했습니다.",
+    "submit": "계정 만들기",
+    "creating": "생성 중..."
+  },
+  "userManagement": {
+    "addUser": "사용자 추가",
+    "createUser": "생성",
+    "createFailed": "사용자 생성에 실패했습니다.",
+    "userList": "사용자 목록",
+    "userCount": "계정 {{count}}개",
+    "noUsers": "사용자가 없습니다.",
+    "roleLabel": "역할",
+    "roleAdmin": "관리자",
+    "roleUser": "일반 사용자",
+    "changePassword": "비밀번호 변경",
+    "changePasswordFailed": "비밀번호 업데이트에 실패했습니다.",
+    "passwordChanged": "비밀번호가 업데이트되었습니다.",
+    "deleteUser": "사용자 삭제",
+    "cannotDeleteSelf": "자신의 계정은 삭제할 수 없습니다."
   }
 }

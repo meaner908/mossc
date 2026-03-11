@@ -1,87 +1,131 @@
 import { type NextRequest, NextResponse } from "next/server";
 
-const AUTH_COOKIE_NAME = "mossc_auth";
+import { HEADER_USER_ID, HEADER_USER_ROLE } from "@/lib/user-context";
 
+const SESSION_COOKIE_NAME = "mossc_session";
 const encoder = new TextEncoder();
 
-const hexToUint8Array = (hex: string): Uint8Array<ArrayBuffer> => {
-  if (hex.length % 2 !== 0) return new Uint8Array(new ArrayBuffer(0));
-  const buf = new ArrayBuffer(hex.length / 2);
+const getSecret = (): string => {
+  const secret =
+    process.env.MOSSC_SECRET?.trim() || process.env.MOSSC_PASSWORD?.trim();
+  if (!secret) {
+    if (process.env.NODE_ENV === "production") {
+      throw new Error(
+        "MOSSC_SECRET environment variable is required in production. " +
+          "Set it to a long random string to sign session tokens."
+      );
+    }
+    return "mossc_insecure_dev_secret_CHANGE_ME";
+  }
+  return secret;
+};
+
+/**
+ * Decodes a base64url string to UTF-8 (edge-compatible, no Buffer needed).
+ */
+const decodeBase64url = (input: string): string => {
+  const base64 = input.replace(/-/g, "+").replace(/_/g, "/");
+  const padded = base64.padEnd(base64.length + (4 - (base64.length % 4)) % 4, "=");
+  return atob(padded);
+};
+
+/**
+ * Converts a base64url string to a Uint8Array<ArrayBuffer> (edge-compatible).
+ */
+const base64urlToBytes = (input: string): Uint8Array<ArrayBuffer> => {
+  const decoded = decodeBase64url(input);
+  const buf = new ArrayBuffer(decoded.length);
   const bytes = new Uint8Array(buf);
-  for (let i = 0; i < hex.length; i += 2) {
-    bytes[i / 2] = parseInt(hex.substring(i, i + 2), 16);
+  for (let i = 0; i < decoded.length; i++) {
+    bytes[i] = decoded.charCodeAt(i);
   }
   return bytes;
 };
 
+type SessionPayload = {
+  sub: string;
+  role: "admin" | "user";
+  exp: number;
+};
+
 /**
- * Verifies the session cookie using Web Crypto HMAC-SHA256 (edge-compatible).
- * Uses crypto.subtle.verify which is inherently timing-safe.
+ * Verifies the session token and extracts payload. Edge-compatible (Web Crypto).
  */
-const verifySessionCookie = async (
-  cookieValue: string,
-  password: string
-): Promise<boolean> => {
+const verifySessionToken = async (
+  token: string
+): Promise<SessionPayload | null> => {
+  if (!token) return null;
+  const dotIdx = token.lastIndexOf(".");
+  if (dotIdx === -1) return null;
+
+  const encodedPayload = token.slice(0, dotIdx);
+  const signature = token.slice(dotIdx + 1);
+
+  const secret = getSecret();
   try {
-    const tokenBytes = hexToUint8Array(cookieValue);
-    if (tokenBytes.length === 0) return false;
-    const keyMaterial = await crypto.subtle.importKey(
+    const key = await crypto.subtle.importKey(
       "raw",
-      encoder.encode(password),
+      encoder.encode(secret),
       { name: "HMAC", hash: "SHA-256" },
       false,
       ["verify"]
     );
-    return crypto.subtle.verify(
+    const sigBytes = base64urlToBytes(signature);
+    const valid = await crypto.subtle.verify(
       "HMAC",
-      keyMaterial,
-      tokenBytes,
-      encoder.encode("mossc_session_v1")
+      key,
+      sigBytes,
+      encoder.encode(encodedPayload)
     );
+    if (!valid) return null;
+
+    const payloadJson = decodeBase64url(encodedPayload);
+    const payload = JSON.parse(payloadJson) as SessionPayload;
+    if (!payload.sub || !payload.role || typeof payload.exp !== "number") return null;
+    if (payload.exp < Math.floor(Date.now() / 1000)) return null;
+    return payload;
   } catch {
-    return false;
+    return null;
   }
 };
 
 export async function proxy(request: NextRequest) {
-  const password = process.env.MOSSC_PASSWORD?.trim();
-
-  // Auth is disabled — allow all requests through.
-  if (!password) return NextResponse.next();
-
   const { pathname } = request.nextUrl;
 
-  // Always allow the login page and the auth API routes.
+  // Always allow public routes without any session check or header injection.
   if (
     pathname === "/login" ||
-    pathname.startsWith("/api/auth/")
+    pathname === "/setup" ||
+    pathname === "/api/auth/login" ||
+    pathname === "/api/auth/logout" ||
+    pathname === "/api/auth/status" ||
+    pathname === "/api/auth/setup"
   ) {
     return NextResponse.next();
   }
 
-  const cookieValue = request.cookies.get(AUTH_COOKIE_NAME)?.value ?? "";
-  const isValid = await verifySessionCookie(cookieValue, password);
+  const token = request.cookies.get(SESSION_COOKIE_NAME)?.value ?? "";
+  const session = await verifySessionToken(token);
 
-  if (!isValid) {
+  if (!session) {
     const loginUrl = new URL("/login", request.url);
-    // Preserve the original destination so we can redirect back after login.
     if (pathname !== "/") {
       loginUrl.searchParams.set("next", pathname);
     }
     return NextResponse.redirect(loginUrl);
   }
 
-  return NextResponse.next();
+  // Inject user context headers for downstream API routes.
+  const requestHeaders = new Headers(request.headers);
+  requestHeaders.set(HEADER_USER_ID, session.sub);
+  requestHeaders.set(HEADER_USER_ROLE, session.role);
+
+  return NextResponse.next({ request: { headers: requestHeaders } });
 }
 
 export const config = {
   matcher: [
-    /*
-     * Match all paths except:
-     * - _next/static (static files)
-     * - _next/image (image optimisation)
-     * - favicon.ico / public assets (mossclogo.png, etc.)
-     */
     "/((?!_next/static|_next/image|favicon\\.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp|ico)$).*)",
   ],
 };
+

@@ -4,15 +4,16 @@ import { type StudioSettingsPatch } from "@/lib/studio/settings";
 import { defaultStudioInstallContext } from "@/lib/studio/install-context";
 import {
   isStudioDomainApiModeEnabled,
-  peekControlPlaneRuntime,
+  peekControlPlaneRuntimeForUser,
 } from "@/lib/controlplane/runtime";
 import {
-  applyStudioSettingsPatch,
+  applyUserStudioSettingsPatch,
   loadLocalGatewayDefaults,
-  loadStudioSettings,
+  loadUserStudioSettings,
   redactLocalGatewayDefaultsSecrets,
   redactStudioSettingsSecrets,
 } from "@/lib/studio/settings-store";
+import { getCurrentUser } from "@/lib/user-context";
 
 export const runtime = "nodejs";
 
@@ -27,7 +28,7 @@ type RuntimeReconnectMetadata = {
   error?: string;
 };
 
-const normalizeGatewaySettings = (settings: ReturnType<typeof loadStudioSettings>) => {
+const normalizeGatewaySettings = (settings: ReturnType<typeof loadUserStudioSettings>) => {
   const gateway = settings.gateway ?? null;
   return {
     url: typeof gateway?.url === "string" ? gateway.url.trim() : "",
@@ -36,8 +37,8 @@ const normalizeGatewaySettings = (settings: ReturnType<typeof loadStudioSettings
 };
 
 const gatewaySettingsChanged = (
-  previous: ReturnType<typeof loadStudioSettings>,
-  next: ReturnType<typeof loadStudioSettings>
+  previous: ReturnType<typeof loadUserStudioSettings>,
+  next: ReturnType<typeof loadUserStudioSettings>
 ) => {
   const left = normalizeGatewaySettings(previous);
   const right = normalizeGatewaySettings(next);
@@ -45,8 +46,9 @@ const gatewaySettingsChanged = (
 };
 
 const reconnectRuntimeForGatewaySettingsChange = async (
-  previous: ReturnType<typeof loadStudioSettings>,
-  next: ReturnType<typeof loadStudioSettings>
+  userId: string,
+  previous: ReturnType<typeof loadUserStudioSettings>,
+  next: ReturnType<typeof loadUserStudioSettings>
 ): Promise<RuntimeReconnectMetadata | null> => {
   if (!gatewaySettingsChanged(previous, next)) return null;
   if (!isStudioDomainApiModeEnabled()) {
@@ -56,15 +58,15 @@ const reconnectRuntimeForGatewaySettingsChange = async (
       reason: "domain_api_mode_disabled",
     };
   }
-  const runtime = peekControlPlaneRuntime();
-  if (!runtime) {
+  const rt = peekControlPlaneRuntimeForUser(userId);
+  if (!rt) {
     return {
       attempted: false,
       restarted: false,
       reason: "runtime_not_initialized",
     };
   }
-  const previousStatus = runtime.connectionStatus();
+  const previousStatus = rt.connectionStatus();
   if (previousStatus === "stopped") {
     return {
       attempted: false,
@@ -74,7 +76,7 @@ const reconnectRuntimeForGatewaySettingsChange = async (
     };
   }
   try {
-    await runtime.reconnectForGatewaySettingsChange();
+    await rt.reconnectForGatewaySettingsChange();
     return {
       attempted: true,
       restarted: true,
@@ -93,8 +95,11 @@ const reconnectRuntimeForGatewaySettingsChange = async (
   }
 };
 
-const buildSettingsResponseBody = async (metadata?: RuntimeReconnectMetadata | null) => {
-  const settings = loadStudioSettings();
+const buildSettingsResponseBody = async (
+  userId: string,
+  metadata?: RuntimeReconnectMetadata | null
+) => {
+  const settings = loadUserStudioSettings(userId);
   const localGatewayDefaults = loadLocalGatewayDefaults();
   const installContext = defaultStudioInstallContext();
   return {
@@ -114,7 +119,9 @@ const buildSettingsResponseBody = async (metadata?: RuntimeReconnectMetadata | n
 
 export async function GET() {
   try {
-    return NextResponse.json(await buildSettingsResponseBody());
+    const user = await getCurrentUser();
+    const userId = user?.id ?? "system";
+    return NextResponse.json(await buildSettingsResponseBody(userId));
   } catch (err) {
     const message = err instanceof Error ? err.message : "Failed to load studio settings.";
     console.error(message);
@@ -124,17 +131,20 @@ export async function GET() {
 
 export async function PUT(request: Request) {
   try {
+    const user = await getCurrentUser();
+    const userId = user?.id ?? "system";
     const body = (await request.json()) as unknown;
     if (!isPatch(body)) {
       return NextResponse.json({ error: "Invalid settings payload." }, { status: 400 });
     }
-    const previousSettings = loadStudioSettings();
-    const nextSettings = applyStudioSettingsPatch(body);
+    const previousSettings = loadUserStudioSettings(userId);
+    const nextSettings = applyUserStudioSettingsPatch(userId, body);
     const runtimeReconnect = await reconnectRuntimeForGatewaySettingsChange(
+      userId,
       previousSettings,
       nextSettings
     );
-    return NextResponse.json(await buildSettingsResponseBody(runtimeReconnect));
+    return NextResponse.json(await buildSettingsResponseBody(userId, runtimeReconnect));
   } catch (err) {
     const message = err instanceof Error ? err.message : "Failed to save studio settings.";
     console.error(message);

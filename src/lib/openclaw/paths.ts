@@ -40,3 +40,10 @@ export const resolveStateDir = (
   const defaultHome = resolveDefaultHomeDir(homedir);
   return path.join(defaultHome, NEW_STATE_DIRNAME);
 };
+
+/**
+ * Returns the studio settings path for a specific user.
+ * `{STATE_DIR}/openclaw-studio/users/{userId}/settings.json`
+ */
+export const resolveUserStudioSettingsPath = (userId: string): string =>
+  path.join(resolveStateDir(), "openclaw-studio", "users", userId, "settings.json");

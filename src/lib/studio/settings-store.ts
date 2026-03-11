@@ -1,7 +1,7 @@
 import fs from "node:fs";
 import path from "node:path";
 
-import { resolveStateDir } from "@/lib/openclaw/paths";
+import { resolveStateDir, resolveUserStudioSettingsPath } from "@/lib/openclaw/paths";
 import {
   defaultStudioSettings,
   mergeStudioSettings,
@@ -103,5 +103,50 @@ export const applyStudioSettingsPatch = (patch: StudioSettingsPatch): StudioSett
   const current = loadStudioSettings();
   const next = mergeStudioSettings(current, patch);
   saveStudioSettings(next);
+  return next;
+};
+
+// ── Per-user settings ─────────────────────────────────────────────────────────
+
+export const loadUserStudioSettings = (userId: string): StudioSettings => {
+  const settingsPath = resolveUserStudioSettingsPath(userId);
+  if (!fs.existsSync(settingsPath)) {
+    const defaults = defaultStudioSettings();
+    const gateway = loadLocalGatewayDefaults();
+    return gateway ? { ...defaults, gateway } : defaults;
+  }
+  const raw = fs.readFileSync(settingsPath, "utf8");
+  const parsed = JSON.parse(raw) as unknown;
+  const settings = normalizeStudioSettings(parsed);
+  if (!settings.gateway?.token) {
+    const gateway = loadLocalGatewayDefaults();
+    if (gateway) {
+      return {
+        ...settings,
+        gateway: settings.gateway?.url?.trim()
+          ? { url: settings.gateway.url.trim(), token: gateway.token }
+          : gateway,
+      };
+    }
+  }
+  return settings;
+};
+
+const saveUserStudioSettings = (userId: string, next: StudioSettings): void => {
+  const settingsPath = resolveUserStudioSettingsPath(userId);
+  const dir = path.dirname(settingsPath);
+  if (!fs.existsSync(dir)) {
+    fs.mkdirSync(dir, { recursive: true });
+  }
+  fs.writeFileSync(settingsPath, JSON.stringify(next, null, 2), "utf8");
+};
+
+export const applyUserStudioSettingsPatch = (
+  userId: string,
+  patch: StudioSettingsPatch
+): StudioSettings => {
+  const current = loadUserStudioSettings(userId);
+  const next = mergeStudioSettings(current, patch);
+  saveUserStudioSettings(userId, next);
   return next;
 };

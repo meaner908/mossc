@@ -8,7 +8,7 @@
     "create": "बनाएँ",
     "creating": "बनाया जा रहा है",
     "save": "सहेजें",
-    "saving": "सहेजा जा रहा है",
+    "saving": "सहेज रहा है...",
     "confirm": "पुष्टि करें",
     "delete": "हटाएँ",
     "deleting": "हटाया जा रहा है",
@@ -17,7 +17,8 @@
     "meHuman": "मैं (मानव)",
     "memberCount": "{{count}} सदस्य",
     "selectedCount": "{{count}} चुने गए",
-    "searchPlaceholder": "खोजें..."
+    "searchPlaceholder": "खोजें...",
+    "loading": "लोड हो रहा है..."
   },
   "nav": {
     "chat": "संदेश",
@@ -40,12 +41,14 @@
     "sections": {
       "models": "मॉडल कॉन्फ़िग",
       "language": "भाषा",
-      "community": "समुदाय"
+      "community": "समुदाय",
+      "users": "उपयोगकर्ता"
     },
     "descriptions": {
       "models": "AI प्रदाताओं को जोड़ें और उपलब्ध मॉडलों को कॉन्फ़िगर करें",
       "language": "डिफ़ॉल्ट रूप से ब्राउज़र भाषा का पालन करती है, लेकिन आप इसे हाथ से बदल सकते हैं",
-      "community": "अपडेट और सहायता के लिए आधिकारिक WeChat समूह में शामिल हों"
+      "community": "अपडेट और सहायता के लिए आधिकारिक WeChat समूह में शामिल हों",
+      "users": "उपयोगकर्ता खाते और अनुमतियां प्रबंधित करें।"
     },
     "community": {
       "title": "आधिकारिक समुदाय",
@@ -291,6 +294,35 @@
     "error": "गलत पासवर्ड। कृपया पुनः प्रयास करें।",
     "networkError": "नेटवर्क त्रुटि। अपना कनेक्शन जांचें और पुनः प्रयास करें।",
     "logout": "साइन आउट",
-    "loggingOut": "साइन आउट हो रहा है..."
+    "loggingOut": "साइन आउट हो रहा है...",
+    "usernameLabel": "उपयोगकर्ता नाम",
+    "usernamePlaceholder": "उपयोगकर्ता नाम दर्ज करें"
+  },
+  "setup": {
+    "title": "व्यवस्थापक खाता बनाएं",
+    "description": "अपने MossC इंस्टेंस को सुरक्षित करने के लिए पहला व्यवस्थापक खाता सेट करें।",
+    "passwordPlaceholder": "कम से कम 8 वर्ण",
+    "confirmPasswordLabel": "पासवर्ड की पुष्टि करें",
+    "confirmPasswordPlaceholder": "पासवर्ड फिर से दर्ज करें",
+    "passwordMismatch": "पासवर्ड मेल नहीं खाते।",
+    "error": "व्यवस्थापक खाता बनाने में विफल।",
+    "submit": "खाता बनाएं",
+    "creating": "बना रहा है..."
+  },
+  "userManagement": {
+    "addUser": "उपयोगकर्ता जोड़ें",
+    "createUser": "बनाएं",
+    "createFailed": "उपयोगकर्ता बनाने में विफल।",
+    "userList": "उपयोगकर्ता",
+    "userCount": "{{count}} खाता (खाते)",
+    "noUsers": "कोई उपयोगकर्ता नहीं।",
+    "roleLabel": "भूमिका",
+    "roleAdmin": "व्यवस्थापक",
+    "roleUser": "उपयोगकर्ता",
+    "changePassword": "पासवर्ड बदलें",
+    "changePasswordFailed": "पासवर्ड अपडेट करने में विफल।",
+    "passwordChanged": "पासवर्ड अपडेट हो गया।",
+    "deleteUser": "उपयोगकर्ता हटाएं",
+    "cannotDeleteSelf": "अपना खाता नहीं हटा सकते।"
   }
 }

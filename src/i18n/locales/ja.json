@@ -8,16 +8,17 @@
     "create": "作成",
     "creating": "作成中",
     "save": "保存",
-    "saving": "保存中",
+    "saving": "保存中...",
     "confirm": "確認",
     "delete": "削除",
     "deleting": "削除中",
     "justNow": "たった今",
-    "me": "私",
+    "me": "あなた",
     "meHuman": "私（人間）",
     "memberCount": "{{count}}人のメンバー",
     "selectedCount": "{{count}}件選択",
-    "searchPlaceholder": "検索..."
+    "searchPlaceholder": "検索...",
+    "loading": "読み込み中..."
   },
   "nav": {
     "chat": "メッセージ",
@@ -40,12 +41,14 @@
     "sections": {
       "models": "モデル設定",
       "language": "言語",
-      "community": "コミュニティ"
+      "community": "コミュニティ",
+      "users": "ユーザー管理"
     },
     "descriptions": {
       "models": "AI プロバイダーを追加し、利用可能なモデルを設定します",
       "language": "既定ではブラウザの言語に従い、手動で切り替えることもできます",
-      "community": "公式WeChatグループに参加して最新情報やサポートを受けましょう"
+      "community": "公式WeChatグループに参加して最新情報やサポートを受けましょう",
+      "users": "ユーザーアカウントと権限を管理します。"
     },
     "community": {
       "title": "公式コミュニティ",
@@ -291,6 +294,35 @@
     "error": "パスワードが正しくありません。もう一度お試しください。",
     "networkError": "ネットワークエラーです。接続を確認して再試行してください。",
     "logout": "サインアウト",
-    "loggingOut": "サインアウト中..."
+    "loggingOut": "サインアウト中...",
+    "usernameLabel": "ユーザー名",
+    "usernamePlaceholder": "ユーザー名を入力"
+  },
+  "setup": {
+    "title": "管理者アカウントを作成",
+    "description": "MossC インスタンスを保護するための最初の管理者アカウントを設定します。",
+    "passwordPlaceholder": "8文字以上",
+    "confirmPasswordLabel": "パスワードの確認",
+    "confirmPasswordPlaceholder": "パスワードを再入力",
+    "passwordMismatch": "パスワードが一致しません。",
+    "error": "管理者アカウントの作成に失敗しました。",
+    "submit": "アカウントを作成",
+    "creating": "作成中..."
+  },
+  "userManagement": {
+    "addUser": "ユーザーを追加",
+    "createUser": "作成",
+    "createFailed": "ユーザーの作成に失敗しました。",
+    "userList": "ユーザー一覧",
+    "userCount": "{{count}} アカウント",
+    "noUsers": "ユーザーはありません。",
+    "roleLabel": "ロール",
+    "roleAdmin": "管理者",
+    "roleUser": "一般ユーザー",
+    "changePassword": "パスワードを変更",
+    "changePasswordFailed": "パスワードの更新に失敗しました。",
+    "passwordChanged": "パスワードが更新されました。",
+    "deleteUser": "ユーザーを削除",
+    "cannotDeleteSelf": "自分のアカウントは削除できません。"
   }
 }

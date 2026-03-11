@@ -1,20 +1,11 @@
 import { NextResponse } from "next/server";
 
-import {
-  AUTH_COOKIE_MAX_AGE,
-  AUTH_COOKIE_NAME,
-  computeSessionToken,
-  isAuthEnabled,
-  verifyPassword,
-} from "@/lib/auth";
+import { SESSION_COOKIE_MAX_AGE, SESSION_COOKIE_NAME, createSessionToken } from "@/lib/session";
+import { verifyUserPassword } from "@/lib/users";
 
 export const runtime = "nodejs";
 
 export async function POST(request: Request) {
-  if (!isAuthEnabled()) {
-    return NextResponse.json({ ok: true });
-  }
-
   let body: unknown;
   try {
     body = await request.json();
@@ -22,24 +13,34 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "Invalid JSON payload." }, { status: 400 });
   }
 
-  const password =
-    body && typeof body === "object" && "password" in body
-      ? String((body as Record<string, unknown>).password ?? "")
-      : "";
+  const isRecord = (v: unknown): v is Record<string, unknown> =>
+    Boolean(v && typeof v === "object" && !Array.isArray(v));
 
-  if (!verifyPassword(password)) {
-    return NextResponse.json({ error: "Incorrect password." }, { status: 401 });
+  if (!isRecord(body)) {
+    return NextResponse.json({ error: "Invalid request body." }, { status: 400 });
   }
 
-  const token = computeSessionToken();
+  const username = typeof body.username === "string" ? body.username.trim() : "";
+  const password = typeof body.password === "string" ? body.password : "";
+
+  if (!username || !password) {
+    return NextResponse.json({ error: "Username and password are required." }, { status: 400 });
+  }
+
+  const user = await verifyUserPassword(username, password);
+  if (!user) {
+    return NextResponse.json({ error: "Incorrect username or password." }, { status: 401 });
+  }
+
+  const token = createSessionToken(user.id, user.role);
   const isProduction = process.env.NODE_ENV === "production";
 
-  const response = NextResponse.json({ ok: true });
-  response.cookies.set(AUTH_COOKIE_NAME, token, {
+  const response = NextResponse.json({ ok: true, user: { id: user.id, username: user.username, role: user.role } });
+  response.cookies.set(SESSION_COOKIE_NAME, token, {
     httpOnly: true,
     sameSite: "strict",
     secure: isProduction,
-    maxAge: AUTH_COOKIE_MAX_AGE,
+    maxAge: SESSION_COOKIE_MAX_AGE,
     path: "/",
   });
   return response;
