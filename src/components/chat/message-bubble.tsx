@@ -83,7 +83,7 @@ export function MessageBubble({ message, showSenderInfo = false, onAgentAvatarCl
           </AvatarFallback>
         </Avatar>
         <div className="flex flex-col items-start max-w-[70%]">
-          <div className="rounded-lg rounded-tl-sm px-3 py-2 text-sm leading-relaxed bg-[#d6e4ff] text-foreground">
+          <div className="rounded-lg rounded-tl-sm px-3 py-2 text-sm leading-relaxed bg-[#d6e4ff] text-slate-900 dark:bg-[#294a7a] dark:text-slate-100">
             {hasAttachments && (
               <div className={cn("flex gap-2 flex-wrap", message.content && "mb-2")}>
                 {message.attachments!.map((att) => (

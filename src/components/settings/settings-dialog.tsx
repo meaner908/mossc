@@ -77,7 +77,6 @@ export function SettingsDialog({ open, onOpenChange }: SettingsDialogProps) {
     onOpenChange(o)
   }
 
-
   return (
     <Dialog open={open} onOpenChange={handleOpenChange}>
       <DialogContent
